@@ -44,27 +44,9 @@ $facturas = $verFacturas->mostrarFacturas();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($busqueda) > 0) { ?>
-                    <?php foreach ($busqueda as $key => $opciones) : ?>
-                        <tr>
-                            <td><?= $key + 1 ?></td>
-                            <td><?= $opciones['cliente_nombre'] ?></td>
-                            <td><?= $opciones['cliente_apellido'] ?></td>
-                            <td><?= $opciones['cliente_nit'] ?></td>
-                            <td><?= $opciones['cliente_telefono'] ?></td>
-                            <td><?= $opciones['producto_nombre'] ?></td>
-                            <td><?= $opciones['producto_descripcion'] ?></td>
-                            <td><?= $opciones['producto_precio'] ?></td>
-                            <td><?= $opciones['factura_cantidad'] ?></td>
-                            <td><?= $opciones['factura_fecha'] ?></td>
-
-                        </tr>
-                    <?php endforeach ?>
-                <?php } else { ?>
                     <tr>
                         <td colspan="5">No hay pedidos disponibles</td>
                     </tr>
-                <?php } ?>
                 </tbody>
 
             </table>
