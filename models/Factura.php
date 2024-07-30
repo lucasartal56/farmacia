@@ -61,6 +61,38 @@ class Factura extends Conexion
         return $resultado;
     }
 
+    public function buscarFacturas()
+    {
+        
+
+        $sql= "SELECT clientes.cliente_nombre, clientes.cliente_apellido, clientes.cliente_nit, clientes.cliente_telefono, productos.producto_nombre, productos.producto_descripcion, productos.producto_precio, facturas.factura_cantidad, facturas.factura_fecha 
+        FROM facturas INNER JOIN clientes ON facturas.factura_cliente = clientes.cliente_id INNER JOIN productos ON facturas.factura_producto = productos.producto_id 
+        WHERE facturas.factura_situacion = 1 AND clientes.cliente_situacion = 1 AND productos.producto_situacion = 1;";
+
+        if ($this->factura_cliente != '') {
+            $sql .= " and factura_cliente like '$this->factura_cliente' ";
+        }
+
+        if ($this->factura_producto != '') {
+            $sql .= " and factura_producto like '$this->factura_producto' ";
+        }
+
+        if ($this->factura_cantidad != null) {
+            $sql .= " and factura_cantidad = $this->factura_cantidad ";
+        }
+        
+        if ($this->factura_fecha != null) {
+            $sql .= " and factura_fecha = $this->factura_fecha ";
+        }
+
+        if ($this->factura_id != null) {
+            $sql .= " and factura_id = $this->factura_id ";
+        }
+
+        $resultado = self::servir($sql);
+        return $resultado;
+    }
+
     public function modificar()
     {
          $sql = "UPDATE facturas SET factura_cliente = '$this->factura_cliente', factura_producto = '$this->factura_producto', factura_cantidad = '$this->factura_cantidad', factura_fecha = '$this->factura_fecha' where factura_id = '$this->factura_id'";
@@ -75,6 +107,8 @@ class Factura extends Conexion
         return $resultado;
 
     }
+
+    
 
     public function eliminar()
     {
